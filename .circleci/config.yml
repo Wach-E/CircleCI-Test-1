@@ -44,7 +44,12 @@ jobs:
           command: |
             cat ~/output.txt
       - print_pipeline_id:
-          id: << pipeline.id >>
+          id: << pipelines.id >>
+      - run:
+          name: Action on fail
+          command: |
+            echo "Hey Wach, sorry for your failed pipeline"
+          when: on_fail
 
 workflows:
   welcome:
