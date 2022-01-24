@@ -2,8 +2,11 @@ version: 2.1
 
 commands:
   print_pipeline_id:
+    parameters:
+      id:
+        type: string
     steps:
-      - run: echo $CIRCLE_WORKFLOW_ID
+      - run: echo << parameters.id >>
 
 orbs:
   welcome: circleci/welcome-orb@0.4.1
@@ -36,7 +39,8 @@ jobs:
           name: Display workspace contents
           command: |
             cat ~/output.txt
-      - print_pipeline_id
+      - print_pipeline_id: |
+          id: << pipeline.id >>
 
 workflows:
   welcome:
