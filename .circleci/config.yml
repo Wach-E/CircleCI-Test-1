@@ -43,8 +43,9 @@ jobs:
           name: Display workspace contents
           command: |
             cat ~/output.txt
+            return 1
       - print_pipeline_id:
-          id: << pipelines.id >>
+          id: << pipeline.id >>
       - run:
           name: Action on fail
           command: |
