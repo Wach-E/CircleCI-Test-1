@@ -26,7 +26,7 @@ jobs:
       - run:
           name: Display Hello
           command: |
-            echo $message $user_name
+            echo $message $USER_NAME
 
 workflows:
   welcome:
