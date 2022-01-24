@@ -4,9 +4,9 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
 
 jobs:
-  print_hello:
+  save_hello_world_output:
     environment:
-      message: hello
+      message: hello_wach_saved_output
     docker:
       - image: circleci/node:13.8.0
     steps:
@@ -14,25 +14,29 @@ jobs:
       - run:
           name: Display Hello
           command: |
-            echo $message
+            echo $message > output.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - wach/work
 
-  print_world:
-    environment:
-      message: world
+  print_output_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
+      - attach_workspace:
+          at: /tmp/workspace
       - run:
-          name: Display Hello
+          name: Display workspace contents
           command: |
-            echo $message
+            cat output.txt
 
 workflows:
   welcome:
     jobs:
       - welcome/run
-      - print_hello
-      - print_world:
+      - save_hello_world_output
+      - print_output_file:
           requires:
-            - print_hello
+            - save_hello_world_output
