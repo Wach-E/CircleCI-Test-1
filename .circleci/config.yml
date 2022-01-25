@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Testing whatsapp message
           command: |
-            curl -d "Hey Team Lead, Wach pipeline just failed" -H "Content-Type: application/x-www-form-urlencoded" -X POST https://wa.me/8118016342
+            curel -d "Hey Team Lead, Wach pipeline just failed" -H "Content-Type: application/x-www-form-urlencoded" -X POST https://wa.me/8118016342
       - run:
           name: Display workspace contents
           command: |
